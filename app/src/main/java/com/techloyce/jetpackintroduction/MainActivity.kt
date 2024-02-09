@@ -98,11 +98,7 @@ fun LoginPage2() {
     Box(modifier = Modifier
         .fillMaxSize()
         .background(color = Color.Black)) {
-        Image(
-            painter = painterResource(id = R.drawable.img01),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-        )
+
         ClickableText(
             text = AnnotatedString("Sign up here"),
             modifier = Modifier
@@ -133,8 +129,7 @@ fun LoginPage2() {
         Text(text = "Login", style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Default))
 
         Spacer(modifier = Modifier.height(20.dp))
-        Box(
-            modifier = Modifier.alpha(0.4f) // Set the opacity value here (e.g., 0.5f for 50% opacity)
+        Box( // Set the opacity value here (e.g., 0.5f for 50% opacity)
         ) {
             TextField(
                 label = { Text(text = "Mobile Number") },
@@ -146,7 +141,6 @@ fun LoginPage2() {
 
         Spacer(modifier = Modifier.height(20.dp))
         Box (
-            modifier = Modifier.alpha(0.4f)
         ){
             TextField(
                 label = { Text(text = "Password") },
@@ -171,7 +165,6 @@ fun LoginPage2() {
                     .fillMaxWidth()
                     .padding(40.dp, 0.dp, 40.dp, 0.dp)
                     .height(50.dp)
-                    .alpha(0.6f)
             ) {
                 Text(text = "Login")
             }
