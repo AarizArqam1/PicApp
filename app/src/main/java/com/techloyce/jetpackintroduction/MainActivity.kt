@@ -67,51 +67,31 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetPackIntroductionTheme {
-                LoginPage2()
+                LoginPage()
                 }
-
-//                Column{
-//                    Text(
-//                        text = "text 01",
-//                        fontSize = 30.sp,
-//                        color = Color.Cyan,
-//                        modifier = Modifier
-//                            .background(Color.Black)
-//
-//                    )
-//                    var arr=arrayOf("arr01","arr02","arr03","arr04")
-//                    for (nam in arr)
-//                        Text(text = nam)
-//
-//                }
-//                Text(
-//                    text = "jetpack Compoadfse"
-//                )
             }
         }
     }
 @Preview
 @Composable
-fun LoginPage2() {
+fun LoginPage() {
     val context = LocalContext.current
 
     Box(modifier = Modifier
         .fillMaxSize()
         .background(color = Color.Black)) {
 
-        ClickableText(
+        Text(
             text = AnnotatedString("Sign up here"),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(20.dp),
-            onClick = {
-                Toast.makeText(context, "Work in-progress", Toast.LENGTH_SHORT).show()
-            },
+
             style = TextStyle(
                 fontSize = 14.sp,
                 fontFamily = FontFamily.Default,
                 textDecoration = TextDecoration.Underline,
-                color = PurpleGrey40
+                color = Color.White
             )
         )
     }
@@ -126,7 +106,7 @@ fun LoginPage2() {
         val username = remember { mutableStateOf(TextFieldValue()) }
         val password = remember { mutableStateOf(TextFieldValue()) }
 
-        Text(text = "Login", style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Default))
+        Text(text = "Login", style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Default, color = Color.White))
 
         Spacer(modifier = Modifier.height(20.dp))
         Box( // Set the opacity value here (e.g., 0.5f for 50% opacity)
@@ -160,7 +140,6 @@ fun LoginPage2() {
                         null
                     )
                 },
-                shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(40.dp, 0.dp, 40.dp, 0.dp)
@@ -178,31 +157,9 @@ fun LoginPage2() {
             },
             style = TextStyle(
                 fontSize = 14.sp,
-                fontFamily = FontFamily.Default
+                fontFamily = FontFamily.Default,
+                color = Color.White
             )
         )
     }
 }
-
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    LazyColumn {
-//        items(10){
-//                i->
-//            Icon(imageVector = Icons.Default.Add, contentDescription = null,modifier=Modifier
-//                .background(Color.Yellow)
-//                .size(100.dp)
-//                .fillParentMaxWidth()
-//            )
-//        }
-//
-//    }
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    JetPackIntroductionTheme {
-//        Greeting("Android")
-//    }
-//}
