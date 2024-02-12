@@ -164,7 +164,7 @@ fun LoginPage2() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(40.dp, 0.dp, 40.dp, 0.dp)
-                    .height(51.dp)
+                    .height(50.dp)
             ) {
                 Text(text = "Login")
             }
