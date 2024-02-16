@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -55,6 +57,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewDynamicColors
+import androidx.compose.ui.tooling.preview.PreviewFontScale
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
@@ -72,6 +78,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
 @Preview
 @Composable
 fun LoginPage() {
@@ -79,7 +86,7 @@ fun LoginPage() {
 
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(color = Color.Black)) {
+        .background(Color.Black)) {
 
         Text(
             text = AnnotatedString("Sign up here"),
@@ -98,7 +105,10 @@ fun LoginPage() {
 
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .border(10.dp,Color.Blue)
+            .padding(10.dp)
+            .border(10.dp,Color.Magenta),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -109,34 +119,16 @@ fun LoginPage() {
         Text(text = "Login", style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Default, color = Color.White))
 
         Spacer(modifier = Modifier.height(20.dp))
-        Box( // Set the opacity value here (e.g., 0.5f for 50% opacity)
-        ) {
-            TextField(
-                label = { Text(text = "Mobile Number") },
-                value = username.value,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                onValueChange = { username.value = it }
-            )
-        }
-
+        CustomTextField("Email",value = username.value, onValueChange = { username.value = it })
         Spacer(modifier = Modifier.height(20.dp))
-        Box (
-        ){
-            TextField(
-                label = { Text(text = "Password") },
-                value = password.value,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                onValueChange = { password.value = it })
-        }
-
+        CustomTextField("Password",value = password.value, onValueChange = { password.value = it })
         Spacer(modifier = Modifier.height(20.dp))
         //Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
                 onClick = {
                     ContextCompat.startActivity(
                         context,
-                        Intent(context, MainActivity::class.java),
+                        Intent(context, MainActivity2::class.java),
                         null
                     )
                 },
@@ -160,6 +152,19 @@ fun LoginPage() {
                 fontFamily = FontFamily.Default,
                 color = Color.White
             )
+        )
+    }
+}
+@Composable
+fun CustomTextField(labelText: String, value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
+    Box(
+        modifier = Modifier.padding(horizontal = 40.dp, vertical = 0.dp)
+    ) {
+        TextField(
+            label = { Text(text = labelText) },
+            value = value,
+            onValueChange = onValueChange,
+//            modifier = Modifier.fillMaxWidth()
         )
     }
 }
