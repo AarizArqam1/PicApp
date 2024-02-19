@@ -28,11 +28,20 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -68,12 +77,49 @@ import com.techloyce.jetpackintroduction.ui.theme.JetPackIntroductionTheme
 import com.techloyce.jetpackintroduction.ui.theme.PurpleGrey40
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
+data class navItem(
+    val title: String,
+    val selectedIcon: ImageVector,
+    val unSelectedIcon: ImageVector,
+    val hasNews: Boolean
+
+)
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JetPackIntroductionTheme {
-                LoginPage()
+                val item= listOf(
+                    navItem(title="Home",
+                        selectedIcon = Icons.Filled.Home,
+                        unSelectedIcon = Icons.Outlined.Home,
+                        hasNews = false),
+                    navItem(title="Chat",
+                        selectedIcon = Icons.Filled.Email,
+                        unSelectedIcon = Icons.Outlined.Email,
+                        hasNews = false),
+                    navItem(title="Setting",
+                        selectedIcon = Icons.Filled.Settings,
+                        unSelectedIcon = Icons.Outlined.Settings,
+                        hasNews = false)
+                )
+                //LoginPage()
+                Scaffold(
+                    bottomBar = {
+                        NavigationBar {
+                            item.forEachIndexed { index, navItem ->
+                                NavigationBarItem(
+                                    selected = false,
+                                    onClick = { /*TODO*/ },
+                                    icon = { /*TODO*/ })
+                            }
+
+                        }
+                    }
+                ) {
+
+                }
                 }
             }
         }
@@ -106,9 +152,9 @@ fun LoginPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .border(10.dp,Color.Blue)
+            .border(10.dp, Color.Blue)
             .padding(10.dp)
-            .border(10.dp,Color.Magenta),
+            .border(10.dp, Color.Magenta),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

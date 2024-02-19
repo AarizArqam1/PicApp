@@ -35,7 +35,12 @@ class MainActivity2 : ComponentActivity() {
         setContent {
             JetPackIntroductionTheme {
                 // A surface container using the 'background' color from the theme
-                ClickableCard()
+                Column(){
+                    ClickableCard("Route 1")
+                    ClickableCard("Route 2")
+                    ClickableCard("Route 3")
+                    ClickableCard("Route 4")
+                }
                 //Greeting()
 
             }
@@ -67,24 +72,21 @@ fun Greeting() {
     }
 }
 @Composable
-fun ClickableCard() {
+fun ClickableCard(route:String) {
     val context = LocalContext.current
     Card(
 
         modifier = Modifier
             .padding(16.dp)
             .clickable(onClick = {
-                Toast.makeText(context, "Work in-progress", Toast.LENGTH_SHORT).show()
+                Toast
+                    .makeText(context, "Work in-progress", Toast.LENGTH_SHORT)
+                    .show()
             }), // Adding clickable modifier,
 
     ) {
         // Content of the card
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(text = "Clickable Card")
-            Text(text = "Click me!")
-        }
+        Text(text = route)
     }
 }
 
