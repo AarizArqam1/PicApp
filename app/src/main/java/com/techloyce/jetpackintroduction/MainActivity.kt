@@ -1,81 +1,65 @@
 package com.techloyce.jetpackintroduction
 
 
+import android.content.Context
 import android.content.Intent
-import android.media.RouteListingPreference
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewDynamicColors
-import androidx.compose.ui.tooling.preview.PreviewFontScale
-import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.techloyce.jetpackintroduction.ui.theme.JetPackIntroductionTheme
-import com.techloyce.jetpackintroduction.ui.theme.PurpleGrey40
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 data class navItem(
     val title: String,
@@ -86,44 +70,149 @@ data class navItem(
 )
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JetPackIntroductionTheme {
-                val item= listOf(
-                    navItem(title="Home",
-                        selectedIcon = Icons.Filled.Home,
-                        unSelectedIcon = Icons.Outlined.Home,
-                        hasNews = false),
-                    navItem(title="Chat",
-                        selectedIcon = Icons.Filled.Email,
-                        unSelectedIcon = Icons.Outlined.Email,
-                        hasNews = false),
-                    navItem(title="Setting",
-                        selectedIcon = Icons.Filled.Settings,
-                        unSelectedIcon = Icons.Outlined.Settings,
-                        hasNews = false)
-                )
-                //LoginPage()
-                Scaffold(
-                    bottomBar = {
-                        NavigationBar {
-                            item.forEachIndexed { index, navItem ->
-                                NavigationBarItem(
-                                    selected = false,
-                                    onClick = { /*TODO*/ },
-                                    icon = { /*TODO*/ })
-                            }
-
-                        }
-                    }
+                val scrollState = rememberScrollState()
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(scrollState)
+                        .fillMaxSize()
                 ) {
-
+                    Text(text = "Speedo Bus Route",modifier = Modifier
+                        .padding(5.dp)
+                        .fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                    )
+                    ClickableCard(applicationContext,"Route 1","Railway Station to Bhatti Ckawk")
+                    ClickableCard(applicationContext,"Route 2","Samanabad Mor to Bhatti Chawk")
+                    ClickableCard(applicationContext,"Route 3","Railway Station to Shahdara Lari Aada")
+                    ClickableCard(applicationContext,"Route 4","R.A Bazar to Chungi Amar Sadhu")
+                    ClickableCard(applicationContext,"Route 5","Shadbagh UhderPass to Bhatti Chawk")
+                    ClickableCard(applicationContext,"Route 6","Babu Sabu to Raj Garh Chawk")
+                    ClickableCard(applicationContext,"Route 7","Bagrian to Chunji Amar Sidhu")
+                    ClickableCard(applicationContext,"Route 8","Canal to Dewo Termminal Thokr")
+                    ClickableCard(applicationContext,"Route 9","Railway Station Chauburgi")
+                    ClickableCard(applicationContext,"Route 10","Multan Chungi to Qartabe Chawk")
+                    ClickableCard(applicationContext,"Route 11","Babu Sabu to main Market Gulberg")
+                    ClickableCard(applicationContext,"Route 12","R.A Bazar to Civil Secretariat")
+                    ClickableCard(applicationContext,"Route 13","Bagrian to Kalma Ckawk")
+                    ClickableCard(applicationContext,"Route 14","R.A Bazar to Chungi Amar Sindhu")
+                    ClickableCard(applicationContext,"Route 15","Bhatti Chawk to R.A Bazar")
+                    ClickableCard(applicationContext,"Route 16","Canal to Dawo Terminal Thokr")
                 }
-                }
+                
+                
+                
+            }
             }
         }
     }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ClickableCard(context:Context,routeId:String,routeTitle:String) {
+    Card(
+        onClick = {
+            Toast.makeText(context, routeId+" Clicked", Toast.LENGTH_SHORT).show()
+        },
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        ),
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+            .height(100.dp)
+    ) {
+        Column {
+            Text(
+                text = routeId,
+                modifier = Modifier
+                    .padding(5.dp)
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center,
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Text(text = routeTitle,
+                modifier = Modifier
+                    .padding(3.dp)
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center,)
+        }
+    }
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun navBar(){
+    val item= listOf(
+        navItem(title="Home",
+            selectedIcon = Icons.Filled.Home,
+            unSelectedIcon = Icons.Outlined.Home,
+            hasNews = false),
+        navItem(title="Chat",
+            selectedIcon = Icons.Filled.Email,
+            unSelectedIcon = Icons.Outlined.Email,
+            hasNews = false),
+        navItem(title="Setting",
+            selectedIcon = Icons.Filled.Settings,
+            unSelectedIcon = Icons.Outlined.Settings,
+            hasNews = false)
+    )
+    var selectedItemIndex by rememberSaveable{
+        mutableStateOf(0)
+    }
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                item.forEachIndexed { index, navItem ->
+                    NavigationBarItem(
+                        selected = selectedItemIndex==index,
+                        onClick = {
+                            selectedItemIndex=index
+                        },
+                        label={
+                            Text(text = navItem.title)
+                        },
+                        icon = {
+//                            BadgedBox(badge = {
+//                                Badge ()
+//
+//                            }) {
+//                                Icon(
+//                                    imageVector = if (selectedItemIndex==index){
+//                                        navItem.selectedIcon
+//                                    }
+//                                    else{
+//                                        navItem.unSelectedIcon
+//                                    },
+//                                    contentDescription = navItem.title)
+//                            }
+                            Icon(
+                                    imageVector = if (selectedItemIndex==index){
+                                        navItem.selectedIcon
+                                    }
+                                    else{
+                                        navItem.unSelectedIcon
+                                    },
+                                    contentDescription = navItem.title)
+
+                        })
+                }
+
+            }
+        }
+    ) {
+
+    }
+
+
+}
+
 
 @Preview
 @Composable
@@ -214,3 +303,4 @@ fun CustomTextField(labelText: String, value: TextFieldValue, onValueChange: (Te
         )
     }
 }
+
