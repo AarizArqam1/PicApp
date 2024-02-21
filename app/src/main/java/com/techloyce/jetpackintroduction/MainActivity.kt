@@ -59,6 +59,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import com.techloyce.jetpackintroduction.Components.ClickableCard
+import com.techloyce.jetpackintroduction.Components.navBar
 import com.techloyce.jetpackintroduction.ui.theme.JetPackIntroductionTheme
 
 data class navItem(
@@ -75,6 +77,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetPackIntroductionTheme {
+                //navBar()
                 val scrollState = rememberScrollState()
                 Column(
                     modifier = Modifier
@@ -111,107 +114,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ClickableCard(context:Context,routeId:String,routeTitle:String) {
-    Card(
-        onClick = {
-            Toast.makeText(context, routeId+" Clicked", Toast.LENGTH_SHORT).show()
-        },
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        ),
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-            .height(100.dp)
-    ) {
-        Column {
-            Text(
-                text = routeId,
-                modifier = Modifier
-                    .padding(5.dp)
-                    .fillMaxWidth(),
-                textAlign = TextAlign.Center,
-            )
-            Spacer(modifier = Modifier.height(5.dp))
-
-            Text(text = routeTitle,
-                modifier = Modifier
-                    .padding(3.dp)
-                    .fillMaxWidth(),
-                textAlign = TextAlign.Center,)
-        }
-    }
-
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun navBar(){
-    val item= listOf(
-        navItem(title="Home",
-            selectedIcon = Icons.Filled.Home,
-            unSelectedIcon = Icons.Outlined.Home,
-            hasNews = false),
-        navItem(title="Chat",
-            selectedIcon = Icons.Filled.Email,
-            unSelectedIcon = Icons.Outlined.Email,
-            hasNews = false),
-        navItem(title="Setting",
-            selectedIcon = Icons.Filled.Settings,
-            unSelectedIcon = Icons.Outlined.Settings,
-            hasNews = false)
-    )
-    var selectedItemIndex by rememberSaveable{
-        mutableStateOf(0)
-    }
-    Scaffold(
-        bottomBar = {
-            NavigationBar {
-                item.forEachIndexed { index, navItem ->
-                    NavigationBarItem(
-                        selected = selectedItemIndex==index,
-                        onClick = {
-                            selectedItemIndex=index
-                        },
-                        label={
-                            Text(text = navItem.title)
-                        },
-                        icon = {
-//                            BadgedBox(badge = {
-//                                Badge ()
-//
-//                            }) {
-//                                Icon(
-//                                    imageVector = if (selectedItemIndex==index){
-//                                        navItem.selectedIcon
-//                                    }
-//                                    else{
-//                                        navItem.unSelectedIcon
-//                                    },
-//                                    contentDescription = navItem.title)
-//                            }
-                            Icon(
-                                    imageVector = if (selectedItemIndex==index){
-                                        navItem.selectedIcon
-                                    }
-                                    else{
-                                        navItem.unSelectedIcon
-                                    },
-                                    contentDescription = navItem.title)
-
-                        })
-                }
-
-            }
-        }
-    ) {
-
-    }
 
 
-}
+
 
 
 @Preview

@@ -38,10 +38,8 @@ class MainActivity2 : ComponentActivity() {
         setContent {
             JetPackIntroductionTheme {
                 // A surface container using the 'background' color from the theme
-                Column(){
-
-                }
-                //Greeting()
+//                navBar()
+//                Greeting()
 
             }
         }
