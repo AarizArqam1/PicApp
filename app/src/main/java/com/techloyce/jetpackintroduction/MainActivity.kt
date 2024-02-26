@@ -191,7 +191,7 @@ fun LoginPage() {
                 onClick = {
                     ContextCompat.startActivity(
                         context,
-                        Intent(context, MainActivity2::class.java),
+                        Intent(context, this::class.java),
                         null
                     )
                 },

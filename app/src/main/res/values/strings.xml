@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">jetPack introduction</string>
-    <string name="title_activity_main2">MainActivity2</string>
+    <string name="app_name">Bus Appliation</string>
+    <string name="title_activity_main2">Bus Application</string>
+    <string name="title_activity_splash">splash</string>
 </resources>
