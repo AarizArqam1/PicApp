@@ -1,7 +1,7 @@
 package com.techloyce.jetpackintroduction
 
 
-import android.content.Context
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -20,22 +20,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.OutlinedButton
+
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -46,21 +35,31 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.techloyce.jetpackintroduction.Components.ClickableCard
+import com.techloyce.jetpackintroduction.Components.ClickableOutlinedCard
 import com.techloyce.jetpackintroduction.Components.navBar
+import com.techloyce.jetpackintroduction.Model.Route
 import com.techloyce.jetpackintroduction.ui.theme.JetPackIntroductionTheme
 
 data class navItem(
@@ -77,38 +76,55 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetPackIntroductionTheme {
+                //LoginPage()
+                val routes:List<Route>
+                routes=mutableListOf(
+                    Route("Route 1","Railway Station to Bhatti Ckawk"),
+                    Route("Route 2","Samanabad Mor to Bhatti Chawk"),
+                    Route("Route 3","Railway Station to Shahdara Lari Aada"),
+                    Route("Route 4","R.A Bazar to Chungi Amar Sadhu"),
+                    Route("Route 5","Shadbagh UhderPass to Bhatti Chawk"),
+                    Route("Route 7","Bagrian to Chunji Amar Sidhu"),
+                    Route("Route 8","Canal to Dewo Termminal Thokr"),
+                    Route("Route 9","Railway Station Chauburgi"),
+                    Route("Route 10","Multan Chungi to Qartabe Chawk"),
+                    Route("Route 11","Babu Sabu to main Market Gulberg"),
+                    Route("Route 12","R.A Bazar to Civil Secretariat"),
+                    Route("Route 13","Bagrian to Kalma Ckawk"),
+                    Route("Route 14","R.A Bazar to Chungi Amar Sindhu"),
+                    Route("Route 15","Bhatti Chawk to R.A Bazar"),
+                    Route("Route 16","Canal to Dawo Terminal Thokr")
+                )
                 //navBar()
                 val scrollState = rememberScrollState()
                 Column(
                     modifier = Modifier
                         .verticalScroll(scrollState)
                         .fillMaxSize()
+                        .background(Color(0xFFD0C4AB))
                 ) {
-                    Text(text = "Speedo Bus Route",modifier = Modifier
+                    val offset = Offset(5.0f, 10.0f)
+
+                    Text(text = "Bus Route",modifier = Modifier
                         .padding(5.dp)
                         .fillMaxWidth(),
+                        fontWeight = FontWeight.ExtraBold,
                         textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            fontSize = 24.sp,
+                            shadow = Shadow(
+                                color = Color.Red, offset = offset, blurRadius = 3f
+                            )
+                        )
                     )
-                    ClickableCard(applicationContext,"Route 1","Railway Station to Bhatti Ckawk")
-                    ClickableCard(applicationContext,"Route 2","Samanabad Mor to Bhatti Chawk")
-                    ClickableCard(applicationContext,"Route 3","Railway Station to Shahdara Lari Aada")
-                    ClickableCard(applicationContext,"Route 4","R.A Bazar to Chungi Amar Sadhu")
-                    ClickableCard(applicationContext,"Route 5","Shadbagh UhderPass to Bhatti Chawk")
-                    ClickableCard(applicationContext,"Route 6","Babu Sabu to Raj Garh Chawk")
-                    ClickableCard(applicationContext,"Route 7","Bagrian to Chunji Amar Sidhu")
-                    ClickableCard(applicationContext,"Route 8","Canal to Dewo Termminal Thokr")
-                    ClickableCard(applicationContext,"Route 9","Railway Station Chauburgi")
-                    ClickableCard(applicationContext,"Route 10","Multan Chungi to Qartabe Chawk")
-                    ClickableCard(applicationContext,"Route 11","Babu Sabu to main Market Gulberg")
-                    ClickableCard(applicationContext,"Route 12","R.A Bazar to Civil Secretariat")
-                    ClickableCard(applicationContext,"Route 13","Bagrian to Kalma Ckawk")
-                    ClickableCard(applicationContext,"Route 14","R.A Bazar to Chungi Amar Sindhu")
-                    ClickableCard(applicationContext,"Route 15","Bhatti Chawk to R.A Bazar")
-                    ClickableCard(applicationContext,"Route 16","Canal to Dawo Terminal Thokr")
+                    routes.forEach { route ->
+                        ClickableOutlinedCard(applicationContext,route.route,route.description)
+                    }
+
                 }
-                
-                
-                
+
+
+
             }
             }
         }
@@ -126,7 +142,8 @@ fun LoginPage() {
 
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(Color.Black)) {
+        .background(Color.White)
+    ){
 
         Text(
             text = AnnotatedString("Sign up here"),
@@ -164,7 +181,13 @@ fun LoginPage() {
         CustomTextField("Password",value = password.value, onValueChange = { password.value = it })
         Spacer(modifier = Modifier.height(20.dp))
         //Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-            Button(
+        OutlinedButton(
+            onClick = { /* TODO */ }
+        ) {
+            Text("Show more")
+        }
+
+        Button(
                 onClick = {
                     ContextCompat.startActivity(
                         context,
@@ -176,6 +199,7 @@ fun LoginPage() {
                     .fillMaxWidth()
                     .padding(40.dp, 0.dp, 40.dp, 0.dp)
                     .height(50.dp)
+
             ) {
                 Text(text = "Login")
             }
