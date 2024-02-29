@@ -1,45 +1,29 @@
 package com.techloyce.jetpackintroduction
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
-
 import com.techloyce.jetpackintroduction.ui.theme.JetPackIntroductionTheme
 
-class splash : ComponentActivity() {
+class RouteDetail : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JetPackIntroductionTheme {
                 // A surface container using the 'background' color from the theme
-
-
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val painter: Painter = painterResource(id = R.drawable.images)
-                    Image(
-                        painter = painter,
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize()
-                    )
+                    Text(text="We Are Working On The Route Info")
                 }
-                Handler().postDelayed({
-                    val intent = Intent(this, temp::class.java)
-                    startActivity(intent)
-                    finish()
-                }, 3000)
             }
         }
     }
 }
+

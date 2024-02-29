@@ -2,4 +2,8 @@
     <string name="app_name">Bus Appliation</string>
     <string name="title_activity_main2">Bus Application</string>
     <string name="title_activity_splash">splash</string>
+    <string name="title_activity_temp">temp</string>
+    <string name="title_activity_main_temp">MainActivityTemp</string>
+    <string name="title_activity_route">Route</string>
+    <string name="title_activity_home">Home</string>
 </resources>
